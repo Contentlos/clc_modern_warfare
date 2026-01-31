@@ -1,0 +1,354 @@
+:root {
+  --bg: #0c1116;
+  --bg-soft: rgba(16, 22, 28, 0.94);
+  --accent: #7fb97a;
+  --accent-2: #d1b765;
+  --text: #e6ecef;
+  --muted: #9aa5ad;
+  --danger: #d96b6b;
+  --success: #7ad1a3;
+  --panel: rgba(12, 16, 22, 0.92);
+  --panel-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Rajdhani", "Segoe UI", "Arial Narrow", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--text);
+}
+
+#toastLayer {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.toast {
+  min-width: 220px;
+  max-width: 360px;
+  padding: 10px 14px;
+  background: rgba(12, 16, 22, 0.95);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.toast.error { border-left-color: var(--danger); }
+.toast.success { border-left-color: var(--success); }
+
+#uiRoot {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 20% 10%, rgba(34, 52, 70, 0.7), transparent 40%),
+              radial-gradient(circle at 80% 90%, rgba(20, 40, 24, 0.7), transparent 45%),
+              var(--bg);
+  pointer-events: auto;
+}
+
+#uiRoot.hidden {
+  display: none;
+  pointer-events: none;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.logo {
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.status {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.panel {
+  padding: 20px 24px;
+}
+
+.panel-hidden {
+  display: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+}
+
+.card.wide {
+  min-height: 320px;
+  width: min(840px, 92vw);
+  max-height: min(560px, 70vh);
+  overflow: auto;
+}
+
+.card h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.list .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0a0f14;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #0a0f14;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#factionPanel {
+  display: flex;
+  justify-content: center;
+}
+
+.faction-shell {
+  width: min(680px, 90vw);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+}
+
+.faction-header {
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent-2);
+}
+
+.faction-sub {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.faction-list {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.faction-btn {
+  background: rgba(18, 24, 30, 0.85);
+  border: 1px solid rgba(127, 185, 122, 0.4);
+  color: var(--text);
+  padding: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+#depotPanel {
+  display: flex;
+  justify-content: center;
+}
+
+.depot-shell {
+  width: min(980px, 94vw);
+  max-height: min(640px, 76vh);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+}
+
+.depot-left {
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(20, 34, 28, 0.9), rgba(12, 16, 22, 0.95));
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.depot-right {
+  padding: 18px;
+  overflow: auto;
+}
+
+.depot-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+
+.depot-control {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+
+.depot-section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-2);
+}
+
+.depot-resources {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.depot-resources .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+.depot-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.depot-roster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.vehicle-card {
+  background: rgba(16, 22, 28, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vehicle-title {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.vehicle-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.vehicle-cost {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.cost-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(127, 185, 122, 0.4);
+  color: var(--accent);
+}
+
+.cost-badge.low {
+  border-color: rgba(217, 107, 107, 0.6);
+  color: var(--danger);
+}
+
+.vehicle-actions {
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .depot-shell {
+    grid-template-columns: 1fr;
+  }
+  .depot-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}

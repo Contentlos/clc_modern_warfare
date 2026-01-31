@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern Warfare HUD</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="toastLayer"></div>
+
+  <div id="uiRoot" class="hidden">
+    <div class="topbar">
+      <div class="logo">WARCORE</div>
+      <div class="status">
+        <span id="phaseVal">PHASE: -</span>
+        <span id="factionName">FACTION: -</span>
+      </div>
+      <button id="closeBtn" class="btn btn-ghost">CLOSE</button>
+    </div>
+
+    <div id="hudPanel" class="panel">
+      <div class="grid">
+        <section class="card">
+          <h3>Tickets</h3>
+          <div id="ticketsList" class="list"></div>
+        </section>
+        <section class="card">
+          <h3>Resources</h3>
+          <div id="resourceList" class="list"></div>
+        </section>
+        <section class="card">
+          <h3>Zone Status</h3>
+          <div id="zoneList" class="list"></div>
+        </section>
+      </div>
+    </div>
+
+    <div id="mapPanel" class="panel panel-hidden">
+      <div class="card wide">
+        <h3>Operational Map</h3>
+        <div id="mapZones" class="list"></div>
+      </div>
+    </div>
+
+    <div id="factionPanel" class="panel panel-hidden">
+      <div class="faction-shell">
+        <div class="faction-header">Select Faction</div>
+        <div class="faction-sub">Choose your command group for this war theater.</div>
+        <div id="factionList" class="faction-list"></div>
+      </div>
+    </div>
+
+    <div id="depotPanel" class="panel panel-hidden">
+      <div class="depot-shell">
+        <div class="depot-left">
+          <div id="depotName" class="depot-title">Depot</div>
+          <div id="depotControl" class="depot-control">CONTROL: -</div>
+          <div class="depot-section">
+            <div class="depot-section-title">Resources</div>
+            <div id="depotResources" class="depot-resources"></div>
+          </div>
+          <div id="depotNote" class="depot-note"></div>
+        </div>
+        <div class="depot-right">
+          <div class="depot-section-title">Vehicle Roster</div>
+          <div id="depotVehicles" class="depot-roster"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
